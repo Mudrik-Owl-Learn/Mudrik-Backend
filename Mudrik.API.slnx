@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Mudrik.API/Mudrik.API.csproj" />
+  <Project Path="Mudrik.Application/Mudrik.Application.csproj" />
+  <Project Path="Mudrik.Domain/Mudrik.Domain.csproj" />
+  <Project Path="Mudrik.Infrastructure/Mudrik.Infrastructure.csproj" />
+</Solution>
