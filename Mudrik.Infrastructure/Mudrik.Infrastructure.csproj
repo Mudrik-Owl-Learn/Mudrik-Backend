@@ -7,10 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Configurations\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.9">
       <PrivateAssets>all</PrivateAssets>
@@ -25,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Mudrik.Application\Mudrik.Application.csproj" />
+    <ProjectReference Include="..\Mudrik.Domain\Mudrik.Domain.csproj" />
   </ItemGroup>
 
 </Project>
