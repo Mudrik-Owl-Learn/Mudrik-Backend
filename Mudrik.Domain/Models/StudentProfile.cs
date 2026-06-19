@@ -27,7 +27,6 @@ namespace Mudrik.Domain.Entities
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         // Navigation properties
-        public ApplicationUser? User { get; set; }
         public ParentProfile? ParentProfile { get; set; }
         public LearnerAIProfile? LearnerAIProfile { get; set; }
         public GamificationStreak? GamificationStreak { get; set; }

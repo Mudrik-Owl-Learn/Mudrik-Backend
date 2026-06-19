@@ -14,8 +14,6 @@ namespace Mudrik.Infrastructure.Data
     public class AppDbContext(DbContextOptions<AppDbContext> options)
     : IdentityDbContext<ApplicationUser>(options), IAppDbContext
     {
-
-        public DbSet<ApplicationUser> Users { get; set; }
         public DbSet<ParentProfile> ParentProfiles { get; set; }
         public DbSet<StudentProfile> StudentProfiles { get; set; }
         public DbSet<LearnerAIProfile> LearnerAIProfiles { get; set; }

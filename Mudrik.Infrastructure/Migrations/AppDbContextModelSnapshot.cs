@@ -1049,7 +1049,6 @@ namespace Mudrik.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -1080,9 +1079,7 @@ namespace Mudrik.Infrastructure.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
@@ -1102,9 +1099,6 @@ namespace Mudrik.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Email")
-                        .IsUnique();
-
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -1113,7 +1107,7 @@ namespace Mudrik.Infrastructure.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1341,15 +1335,7 @@ namespace Mudrik.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Mudrik.Domain.Models.ApplicationUser", "User")
-                        .WithOne("StudentProfile")
-                        .HasForeignKey("Mudrik.Domain.Entities.StudentProfile", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("ParentProfile");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Mudrik.Domain.Entities.StudentQuizAnswer", b =>
@@ -1475,8 +1461,6 @@ namespace Mudrik.Infrastructure.Migrations
             modelBuilder.Entity("Mudrik.Domain.Models.ApplicationUser", b =>
                 {
                     b.Navigation("ParentProfile");
-
-                    b.Navigation("StudentProfile");
                 });
 #pragma warning restore 612, 618
         }
