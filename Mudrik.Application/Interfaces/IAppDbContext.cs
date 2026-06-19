@@ -9,7 +9,6 @@ namespace Mudrik.Application.Interfaces
 {
     public interface IAppDbContext
     {
-        DbSet<ApplicationUser> Users { get;}
         DbSet<ParentProfile> ParentProfiles { get;}
         DbSet<StudentProfile> StudentProfiles { get; }
         DbSet<LearnerAIProfile> LearnerAIProfiles { get; }

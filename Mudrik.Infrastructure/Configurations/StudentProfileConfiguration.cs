@@ -67,11 +67,6 @@ namespace Mudrik.Domain.Configurations
                 .IsUnique();
 
             // Relationships
-            // StudentProfiles.UserId -> Users.Id : CASCADE
-            builder.HasOne(s => s.User)
-                .WithOne(u => u.StudentProfile)
-                .HasForeignKey<StudentProfile>(s => s.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
 
             // StudentProfiles.ParentProfileId -> ParentProfiles.Id : RESTRICT
             builder.HasOne(s => s.ParentProfile)

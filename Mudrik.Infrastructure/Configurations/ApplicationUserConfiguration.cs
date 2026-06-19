@@ -9,17 +9,6 @@ namespace Mudrik.Domain.Configurations
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
-            builder.ToTable("Users");
-
-            builder.HasKey(u => u.Id);
-
-            builder.Property(u => u.Email)
-                .IsRequired()
-                .HasMaxLength(256);
-
-            builder.Property(u => u.PasswordHash)
-                .IsRequired()
-                .HasMaxLength(512);
 
             builder.Property(u => u.IsActive)
                 .IsRequired()
@@ -33,9 +22,6 @@ namespace Mudrik.Domain.Configurations
             builder.Property(u => u.DeletedAt)
                 .IsRequired(false);
 
-            builder.HasIndex(u => u.Email)
-                .IsUnique();
-
             // Global query filter for soft delete
             builder.HasQueryFilter(u => u.DeletedAt == null);
 
@@ -45,10 +31,6 @@ namespace Mudrik.Domain.Configurations
                 .HasForeignKey<ParentProfile>(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(u => u.StudentProfile)
-                .WithOne(s => s.User)
-                .HasForeignKey<StudentProfile>(s => s.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

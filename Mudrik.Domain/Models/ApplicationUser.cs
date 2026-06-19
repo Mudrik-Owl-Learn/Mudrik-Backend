@@ -14,6 +14,4 @@ public sealed class ApplicationUser : IdentityUser
 
     // Navigation properties
     public ParentProfile? ParentProfile { get; set; }
-    public StudentProfile? StudentProfile { get; set; }
-
 }
