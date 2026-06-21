@@ -157,11 +157,10 @@ namespace Mudrik.Infrastructure.Migrations
 
             modelBuilder.Entity("Mudrik.Domain.Entities.AdaptedLesson", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
 
                     b.Property<string>("AdaptationType")
                         .IsRequired()
@@ -198,11 +197,11 @@ namespace Mudrik.Infrastructure.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<int>("StandardLessonId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("StandardLessonId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("StudentProfileId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("StudentProfileId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("TotalChunks")
                         .HasColumnType("int");
@@ -221,11 +220,10 @@ namespace Mudrik.Infrastructure.Migrations
 
             modelBuilder.Entity("Mudrik.Domain.Entities.AgentGeneratedQuiz", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
 
                     b.Property<int>("AttemptNumber")
                         .HasColumnType("int");
@@ -243,24 +241,24 @@ namespace Mudrik.Infrastructure.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<int>("LessonMicroChunkId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("LessonMicroChunkId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("ScorePercent")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("decimal(5,2)")
                         .HasDefaultValue(0m);
 
-                    b.Property<int>("StandardLessonId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("StandardLessonId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("StartedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETUTCDATE()");
 
-                    b.Property<int>("StudentProfileId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("StudentProfileId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("TotalTimeSeconds")
                         .ValueGeneratedOnAdd()
@@ -286,11 +284,10 @@ namespace Mudrik.Infrastructure.Migrations
 
             modelBuilder.Entity("Mudrik.Domain.Entities.Badge", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -328,11 +325,10 @@ namespace Mudrik.Infrastructure.Migrations
 
             modelBuilder.Entity("Mudrik.Domain.Entities.GamificationStreak", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
 
                     b.Property<int>("CurrentLevel")
                         .ValueGeneratedOnAdd()
@@ -349,7 +345,7 @@ namespace Mudrik.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(1);
 
-                    b.Property<DateTime?>("LastStreakDate")
+                    b.Property<DateOnly>("LastStreakDate")
                         .HasColumnType("date");
 
                     b.Property<int>("LongestStreak")
@@ -357,8 +353,8 @@ namespace Mudrik.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.Property<int>("StudentProfileId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("StudentProfileId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("TotalPoints")
                         .ValueGeneratedOnAdd()
@@ -380,11 +376,10 @@ namespace Mudrik.Infrastructure.Migrations
 
             modelBuilder.Entity("Mudrik.Domain.Entities.LearnerAIProfile", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
 
                     b.Property<int>("ADHDSeverity")
                         .HasColumnType("int");
@@ -451,8 +446,8 @@ namespace Mudrik.Infrastructure.Migrations
                     b.Property<int>("ReadingScore")
                         .HasColumnType("int");
 
-                    b.Property<int>("StudentProfileId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("StudentProfileId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("WritingScore")
                         .HasColumnType("int");
@@ -480,14 +475,13 @@ namespace Mudrik.Infrastructure.Migrations
 
             modelBuilder.Entity("Mudrik.Domain.Entities.LessonMicroChunk", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AdaptedLessonId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("AdaptedLessonId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("AudioScriptUrl")
                         .IsRequired()
@@ -522,8 +516,8 @@ namespace Mudrik.Infrastructure.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<int>("StudentProfileId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("StudentProfileId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -542,11 +536,10 @@ namespace Mudrik.Infrastructure.Migrations
 
             modelBuilder.Entity("Mudrik.Domain.Entities.ParentProfile", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
 
                     b.Property<bool>("ConsentGiven")
                         .ValueGeneratedOnAdd()
@@ -582,11 +575,10 @@ namespace Mudrik.Infrastructure.Migrations
 
             modelBuilder.Entity("Mudrik.Domain.Entities.QuizQuestion", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
 
                     b.Property<string>("ConceptTag")
                         .IsRequired()
@@ -619,11 +611,11 @@ namespace Mudrik.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StandardLessonId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("StandardLessonId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("SubjectId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("SubjectId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -636,11 +628,10 @@ namespace Mudrik.Infrastructure.Migrations
 
             modelBuilder.Entity("Mudrik.Domain.Entities.StandardLesson", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
 
                     b.Property<int>("ChapterNumber")
                         .HasColumnType("int");
@@ -677,8 +668,8 @@ namespace Mudrik.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SubjectId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("SubjectId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -694,14 +685,13 @@ namespace Mudrik.Infrastructure.Migrations
 
             modelBuilder.Entity("Mudrik.Domain.Entities.StudentBadge", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BadgeId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("BadgeId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("EarnedAt")
                         .ValueGeneratedOnAdd()
@@ -713,8 +703,8 @@ namespace Mudrik.Infrastructure.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<int>("StudentProfileId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("StudentProfileId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -728,11 +718,10 @@ namespace Mudrik.Infrastructure.Migrations
 
             modelBuilder.Entity("Mudrik.Domain.Entities.StudentLessonState", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
 
                     b.Property<decimal>("AverageQuizScore")
                         .ValueGeneratedOnAdd()
@@ -761,15 +750,15 @@ namespace Mudrik.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.Property<int>("StandardLessonId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("StandardLessonId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Status")
                         .HasMaxLength(50)
                         .HasColumnType("int");
 
-                    b.Property<int>("StudentProfileId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("StudentProfileId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("TotalAttempts")
                         .ValueGeneratedOnAdd()
@@ -788,11 +777,10 @@ namespace Mudrik.Infrastructure.Migrations
 
             modelBuilder.Entity("Mudrik.Domain.Entities.StudentProfile", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
@@ -860,24 +848,17 @@ namespace Mudrik.Infrastructure.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<int>("ParentProfileId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ParentProfileId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PersonalityTag")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ParentProfileId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
 
                     b.ToTable("StudentProfiles", null, t =>
                         {
@@ -889,14 +870,13 @@ namespace Mudrik.Infrastructure.Migrations
 
             modelBuilder.Entity("Mudrik.Domain.Entities.StudentQuizAnswer", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AgentGeneratedQuizId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("AgentGeneratedQuizId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("AnswerChangeCount")
                         .ValueGeneratedOnAdd()
@@ -911,16 +891,16 @@ namespace Mudrik.Infrastructure.Migrations
                     b.Property<bool>("IsCorrect")
                         .HasColumnType("bit");
 
-                    b.Property<int>("QuizQuestionId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("QuizQuestionId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("SelectedOptionId")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("StudentProfileId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("StudentProfileId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("TimeToAnswerMs")
                         .HasColumnType("int");
@@ -938,11 +918,10 @@ namespace Mudrik.Infrastructure.Migrations
 
             modelBuilder.Entity("Mudrik.Domain.Entities.Subject", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
 
                     b.Property<int>("DisplayOrder")
                         .ValueGeneratedOnAdd()
@@ -967,65 +946,6 @@ namespace Mudrik.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Subjects", (string)null);
-                });
-
-            modelBuilder.Entity("Mudrik.Domain.Entities.XpTransaction", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("AwardedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETUTCDATE()");
-
-                    b.Property<int>("BaseXp")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
-                    b.Property<int>("BonusXp")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
-                    b.Property<string>("EventType")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("GamificationStreakId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ReferenceId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ReferenceType")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<decimal>("StreakMultiplier")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(4,2)")
-                        .HasDefaultValue(1.0m);
-
-                    b.Property<int>("StudentProfileId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TotalXpAwarded")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GamificationStreakId");
-
-                    b.HasIndex("StudentProfileId");
-
-                    b.ToTable("XpTransactions", (string)null);
                 });
 
             modelBuilder.Entity("Mudrik.Domain.Models.ApplicationUser", b =>
@@ -1108,6 +1028,64 @@ namespace Mudrik.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Mudrik.Domain.Models.XpTransaction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
+
+                    b.Property<DateTime>("AwardedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETUTCDATE()");
+
+                    b.Property<int>("BaseXp")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("BonusXp")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<string>("EventType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<Guid>("GamificationStreakId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("ReferenceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReferenceType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<decimal>("StreakMultiplier")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(4,2)")
+                        .HasDefaultValue(1.0m);
+
+                    b.Property<Guid>("StudentProfileId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("TotalXpAwarded")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GamificationStreakId");
+
+                    b.HasIndex("StudentProfileId");
+
+                    b.ToTable("XpTransactions", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1365,7 +1343,7 @@ namespace Mudrik.Infrastructure.Migrations
                     b.Navigation("StudentProfile");
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.XpTransaction", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.XpTransaction", b =>
                 {
                     b.HasOne("Mudrik.Domain.Entities.GamificationStreak", "GamificationStreak")
                         .WithMany("XpTransactions")

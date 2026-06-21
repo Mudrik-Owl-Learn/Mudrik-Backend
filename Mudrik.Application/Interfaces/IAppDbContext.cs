@@ -9,22 +9,21 @@ namespace Mudrik.Application.Interfaces
 {
     public interface IAppDbContext
     {
-        DbSet<ParentProfile> ParentProfiles { get;}
-        DbSet<StudentProfile> StudentProfiles { get; }
-        DbSet<LearnerAIProfile> LearnerAIProfiles { get; }
-        DbSet<Subject> Subjects { get; }
-        DbSet<StandardLesson> StandardLessons { get; }
-        DbSet<QuizQuestion> QuizQuestions { get; }
-        DbSet<AdaptedLesson> AdaptedLessons { get; }
-        DbSet<LessonMicroChunk> LessonMicroChunks { get ; }
-        DbSet<StudentLessonState> StudentLessonStates { get; }
-        DbSet<AgentGeneratedQuiz> AgentGeneratedQuizzes { get; }
-        DbSet<StudentQuizAnswer> StudentQuizAnswers { get; }
-        DbSet<GamificationStreak> GamificationStreaks { get; }
-        DbSet<XpTransaction> XpTransactions { get; }
-        DbSet<Badge> Badges { get; }
-        DbSet<StudentBadge> StudentBadges { get; }
-
+        DbSet<ParentProfile> ParentProfiles { get; set; }
+        DbSet<StudentProfile> StudentProfiles { get; set; }
+        DbSet<LearnerAIProfile> LearnerAIProfiles { get; set; }
+        DbSet<Subject> Subjects { get; set; }
+        DbSet<StandardLesson> StandardLessons { get; set; }
+        DbSet<QuizQuestion> QuizQuestions { get; set; }
+        DbSet<AdaptedLesson> AdaptedLessons { get; set; }
+        DbSet<LessonMicroChunk> LessonMicroChunks { get ; set; }
+        DbSet<StudentLessonState> StudentLessonStates { get; set; }
+        DbSet<AgentGeneratedQuiz> AgentGeneratedQuizzes { get; set; }
+        DbSet<StudentQuizAnswer> StudentQuizAnswers { get; set; }
+        DbSet<GamificationStreak> GamificationStreaks { get; set; }
+        DbSet<XpTransaction> XpTransactions { get; set; }
+        DbSet<Badge> Badges { get; set; }
+        DbSet<StudentBadge> StudentBadges { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

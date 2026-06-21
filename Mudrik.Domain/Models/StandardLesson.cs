@@ -5,8 +5,8 @@ namespace Mudrik.Domain.Entities
 {
     public class StandardLesson
     {
-        public int Id { get; set; }
-        public int SubjectId { get; set; }
+        public Guid Id { get; set; }
+        public Guid SubjectId { get; set; }
         public int GradeLevel { get; set; }
         public int ChapterNumber { get; set; }
         public int LessonOrder { get; set; }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Mudrik.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateModelsAndConfiguration : Migration
+    public partial class InitialCreateAfterGuidUpdate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -58,8 +58,7 @@ namespace Mudrik.Infrastructure.Migrations
                 name: "Badges",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
                     Name = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Rarity = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -76,8 +75,7 @@ namespace Mudrik.Infrastructure.Migrations
                 name: "Subjects",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
                     Title = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     IconUrl = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     DisplayOrder = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
@@ -198,8 +196,7 @@ namespace Mudrik.Infrastructure.Migrations
                 name: "ParentProfiles",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
@@ -221,9 +218,8 @@ namespace Mudrik.Infrastructure.Migrations
                 name: "StandardLessons",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SubjectId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
+                    SubjectId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     GradeLevel = table.Column<int>(type: "int", nullable: false),
                     ChapterNumber = table.Column<int>(type: "int", nullable: false),
                     LessonOrder = table.Column<int>(type: "int", nullable: false),
@@ -249,10 +245,8 @@ namespace Mudrik.Infrastructure.Migrations
                 name: "StudentProfiles",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ParentProfileId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
+                    ParentProfileId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
                     Gender = table.Column<int>(type: "int", maxLength: 20, nullable: false),
@@ -286,10 +280,9 @@ namespace Mudrik.Infrastructure.Migrations
                 name: "QuizQuestions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StandardLessonId = table.Column<int>(type: "int", nullable: false),
-                    SubjectId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
+                    StandardLessonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SubjectId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     QuestionText = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Format = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     OptionsJson = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -319,10 +312,9 @@ namespace Mudrik.Infrastructure.Migrations
                 name: "AdaptedLessons",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StudentProfileId = table.Column<int>(type: "int", nullable: false),
-                    StandardLessonId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
+                    StudentProfileId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StandardLessonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AdaptationType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     AdaptationVersion = table.Column<int>(type: "int", nullable: false),
                     TotalChunks = table.Column<int>(type: "int", nullable: false),
@@ -354,14 +346,13 @@ namespace Mudrik.Infrastructure.Migrations
                 name: "GamificationStreaks",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StudentProfileId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
+                    StudentProfileId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TotalPoints = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     CurrentLevel = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
                     CurrentStreak = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     LongestStreak = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
-                    LastStreakDate = table.Column<DateTime>(type: "date", nullable: true),
+                    LastStreakDate = table.Column<DateOnly>(type: "date", nullable: false),
                     FreezeTokensAvailable = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()")
                 },
@@ -380,9 +371,8 @@ namespace Mudrik.Infrastructure.Migrations
                 name: "LearnerAIProfiles",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StudentProfileId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
+                    StudentProfileId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DyslexiaSeverity = table.Column<int>(type: "int", nullable: false),
                     ADHDSeverity = table.Column<int>(type: "int", nullable: false),
                     ReadingScore = table.Column<int>(type: "int", nullable: false),
@@ -422,10 +412,9 @@ namespace Mudrik.Infrastructure.Migrations
                 name: "StudentBadges",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StudentProfileId = table.Column<int>(type: "int", nullable: false),
-                    BadgeId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
+                    StudentProfileId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BadgeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     HasBeenDisplayed = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     EarnedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()")
                 },
@@ -450,10 +439,9 @@ namespace Mudrik.Infrastructure.Migrations
                 name: "StudentLessonStates",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StudentProfileId = table.Column<int>(type: "int", nullable: false),
-                    StandardLessonId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
+                    StudentProfileId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StandardLessonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Status = table.Column<int>(type: "int", maxLength: 50, nullable: false),
                     AverageQuizScore = table.Column<decimal>(type: "decimal(5,2)", nullable: false, defaultValue: 0m),
                     TotalAttempts = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
@@ -485,10 +473,9 @@ namespace Mudrik.Infrastructure.Migrations
                 name: "LessonMicroChunks",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    AdaptedLessonId = table.Column<int>(type: "int", nullable: false),
-                    StudentProfileId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
+                    AdaptedLessonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StudentProfileId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ChunkOrder = table.Column<int>(type: "int", nullable: false),
                     Format = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Title = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
@@ -519,10 +506,9 @@ namespace Mudrik.Infrastructure.Migrations
                 name: "XpTransactions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StudentProfileId = table.Column<int>(type: "int", nullable: false),
-                    GamificationStreakId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
+                    StudentProfileId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    GamificationStreakId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     EventType = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     BaseXp = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     BonusXp = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
@@ -553,11 +539,10 @@ namespace Mudrik.Infrastructure.Migrations
                 name: "AgentGeneratedQuizzes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StudentProfileId = table.Column<int>(type: "int", nullable: false),
-                    LessonMicroChunkId = table.Column<int>(type: "int", nullable: false),
-                    StandardLessonId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
+                    StudentProfileId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LessonMicroChunkId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StandardLessonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AttemptNumber = table.Column<int>(type: "int", nullable: false),
                     AudioReplayCount = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     ScorePercent = table.Column<decimal>(type: "decimal(5,2)", nullable: false, defaultValue: 0m),
@@ -595,11 +580,10 @@ namespace Mudrik.Infrastructure.Migrations
                 name: "StudentQuizAnswers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    AgentGeneratedQuizId = table.Column<int>(type: "int", nullable: false),
-                    StudentProfileId = table.Column<int>(type: "int", nullable: false),
-                    QuizQuestionId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
+                    AgentGeneratedQuizId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StudentProfileId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    QuizQuestionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     SelectedOptionId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     IsCorrect = table.Column<bool>(type: "bit", nullable: false),
                     TimeToAnswerMs = table.Column<int>(type: "int", nullable: false),
@@ -765,12 +749,6 @@ namespace Mudrik.Infrastructure.Migrations
                 name: "IX_StudentProfiles_ParentProfileId",
                 table: "StudentProfiles",
                 column: "ParentProfileId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StudentProfiles_UserId",
-                table: "StudentProfiles",
-                column: "UserId",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_StudentQuizAnswers_AgentGeneratedQuizId",

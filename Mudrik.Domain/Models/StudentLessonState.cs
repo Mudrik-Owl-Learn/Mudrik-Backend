@@ -5,9 +5,9 @@ namespace Mudrik.Domain.Entities
 {
     public class StudentLessonState
     {
-        public int Id { get; set; }
-        public int StudentProfileId { get; set; }
-        public int StandardLessonId { get; set; }
+        public Guid Id { get; set; }
+        public Guid StudentProfileId { get; set; }
+        public Guid StandardLessonId { get; set; }
         public LessonState Status { get; set; }
         public decimal AverageQuizScore { get; set; }
         public int TotalAttempts { get; set; }

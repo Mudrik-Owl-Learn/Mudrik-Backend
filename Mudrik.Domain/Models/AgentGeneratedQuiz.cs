@@ -5,10 +5,10 @@ namespace Mudrik.Domain.Entities
 {
     public class AgentGeneratedQuiz
     {
-        public int Id { get; set; }
-        public int StudentProfileId { get; set; }
-        public int LessonMicroChunkId { get; set; }
-        public int StandardLessonId { get; set; }
+        public Guid Id { get; set; }
+        public Guid StudentProfileId { get; set; }
+        public Guid LessonMicroChunkId { get; set; }
+        public Guid StandardLessonId { get; set; }
         public int AttemptNumber { get; set; }
         public int AudioReplayCount { get; set; }
         public decimal ScorePercent { get; set; }

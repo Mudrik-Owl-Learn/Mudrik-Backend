@@ -5,10 +5,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Mudrik.Application.Behaviors;
 using Mudrik.Application.Interfaces;
+using Mudrik.Application.Services.Gamification.Commands.AwardXp;
 using Mudrik.Domain.Models;
 using Mudrik.Infrastructure.Data;
 using Mudrik.Infrastructure.DataSeeding;
+using Mudrik.Infrastructure.Realtime;
 using Mudrik.Infrastructure.Services;
+using Mudrik.Infrastructure.Services.Repositories;
 using Mudrik.Infrastructure.Settings;
 
 namespace Mudrik.API
@@ -34,6 +37,18 @@ namespace Mudrik.API
             builder.Services.AddMediatR(options =>
                 options.RegisterServicesFromAssemblies(typeof(IAssemblyMarker).Assembly)
             );
+
+
+            // SignalR
+            builder.Services.AddSignalR();
+
+            builder.Services.AddScoped<IGamificationNotifier, GamificationNotifier>();
+            builder.Services.AddScoped<IXpTransactionRepository, XpTransactionRepository>();
+            builder.Services.AddScoped<IGamificationStreakRepository, GamificationStreakRepository>();
+            builder.Services.AddScoped<IStudentDirectoryLookup, StudentDirectoryLookup>();
+
+            //builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<AwardXpCommand>());
+            //builder.Services.AddValidatorsFromAssemblyContaining<AwardXpCommandValidator>();
 
             builder.Services.AddValidatorsFromAssembly(typeof(IAssemblyMarker).Assembly);
 

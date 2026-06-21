@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Mudrik.Domain.Entities;
+using Mudrik.Domain.Models;
 
 namespace Mudrik.Domain.Configurations
 {
@@ -11,6 +12,9 @@ namespace Mudrik.Domain.Configurations
             builder.ToTable("XpTransactions");
 
             builder.HasKey(x => x.Id);
+
+            builder.Property(a => a.Id)
+    .HasDefaultValueSql("NEWSEQUENTIALID()");
 
             builder.Property(x => x.EventType)
                 .IsRequired()

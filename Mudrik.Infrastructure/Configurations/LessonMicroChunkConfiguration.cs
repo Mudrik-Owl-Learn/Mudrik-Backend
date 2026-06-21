@@ -12,6 +12,9 @@ namespace Mudrik.Domain.Configurations
 
             builder.HasKey(m => m.Id);
 
+            builder.Property(a => a.Id)
+    .HasDefaultValueSql("NEWSEQUENTIALID()");   
+
             builder.Property(m => m.ChunkOrder)
                 .IsRequired();
 

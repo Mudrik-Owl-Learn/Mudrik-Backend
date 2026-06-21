@@ -7,9 +7,8 @@ namespace Mudrik.Domain.Entities
 {
     public class StudentProfile
     {
-        public int Id { get; set; }
-        public string UserId { get; set; }
-        public int ParentProfileId { get; set; }
+        public Guid Id { get; set; }
+        public Guid ParentProfileId { get; set; }
         public string FirstName { get; set; }
         public int Age { get; set; }
         public Gender Gender { get; set; }

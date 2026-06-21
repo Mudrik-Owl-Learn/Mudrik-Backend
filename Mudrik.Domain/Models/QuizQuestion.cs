@@ -5,9 +5,9 @@ namespace Mudrik.Domain.Entities
 {
     public class QuizQuestion
     {
-        public int Id { get; set; }
-        public int StandardLessonId { get; set; }
-        public int SubjectId { get; set; }
+        public Guid Id { get; set; }
+        public Guid StandardLessonId { get; set; }
+        public Guid SubjectId { get; set; }
         public string QuestionText { get; set; }
         public string Format { get; set; }
         public string OptionsJson { get; set; }

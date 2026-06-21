@@ -12,6 +12,9 @@ namespace Mudrik.Domain.Configurations
 
             builder.HasKey(l => l.Id);
 
+            builder.Property(a => a.Id)
+    .HasDefaultValueSql("NEWSEQUENTIALID()");
+
             builder.Property(l => l.Title)
                 .IsRequired()
                 .HasMaxLength(250);
