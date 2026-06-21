@@ -3,18 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Mudrik.Application.Services.Auth.Commands.Login
+namespace Mudrik.Application.Services.Auth.Commands.ForgetPassword
 {
-    public class LoginCommandValidator : AbstractValidator<LoginCommand>
+    public class ForgetPasswordCommandValidator: AbstractValidator<ForgetPasswordCommand>
     {
-        public LoginCommandValidator()
+        public ForgetPasswordCommandValidator()
         {
             RuleFor(x => x.Email)
                 .NotEmpty().WithMessage("البريد الإلكتروني مطلوب")
                 .EmailAddress().WithMessage("صيغة البريد الإلكتروني غير صحيحة");
-
-            RuleFor(x => x.Password)
-                .NotEmpty().WithMessage("كلمة المرور مطلوبة");
         }
     }
 }

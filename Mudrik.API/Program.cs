@@ -40,8 +40,10 @@ namespace Mudrik.API
             builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaveior<,>));
 
             builder.Services.AddScoped<IJwtService, JwtService>();
-
             builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
+
+            builder.Services.AddScoped<IGoogleAuthService, GoogleAuthService>();
+            builder.Services.Configure<GoogleAuthSettings>(builder.Configuration.GetSection("GoogleAuthSettings"));
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

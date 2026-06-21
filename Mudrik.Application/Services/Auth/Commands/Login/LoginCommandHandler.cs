@@ -17,17 +17,13 @@ namespace Mudrik.Application.Services.Auth.Commands.Login
         LoginCommand request, CancellationToken cancellationToken)
         {
             var user = await userManager.FindByEmailAsync(request.Email);
-            if (user is null)
-                throw new ValidationException("Invalid email or password.");
+            if (user is null) throw new ValidationException("البريد الإلكتروني أو كلمة المرور غير صحيحة");
 
-            var signInResult = await signInManager.CheckPasswordSignInAsync(
-                user, request.Password, lockoutOnFailure: true);
+            var signInResult = await signInManager.CheckPasswordSignInAsync(user, request.Password, lockoutOnFailure: true);
 
             if (!signInResult.Succeeded)
             {
-                var reason = signInResult.IsLockedOut
-                    ? "Account is locked out. Try again later."
-                    : "Invalid email or password.";
+                var reason = signInResult.IsLockedOut ? "تم قفل الحساب مؤقتًا. حاول مرة أخرى لاحقًا." : "البريد الإلكتروني أو كلمة المرور غير صحيحة.";
 
                 throw new ValidationException(reason);
             }
