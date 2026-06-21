@@ -5,9 +5,9 @@ namespace Mudrik.Domain.Entities
 {
     public class LessonMicroChunk
     {
-        public int Id { get; set; }
-        public int AdaptedLessonId { get; set; }
-        public int StudentProfileId { get; set; }
+        public Guid Id { get; set; }
+        public Guid AdaptedLessonId { get; set; }
+        public Guid StudentProfileId { get; set; }
         public int ChunkOrder { get; set; }
         public string Format { get; set; }
         public string Title { get; set; }

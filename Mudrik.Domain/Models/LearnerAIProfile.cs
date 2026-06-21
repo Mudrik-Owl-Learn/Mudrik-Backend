@@ -4,8 +4,8 @@ namespace Mudrik.Domain.Entities
 {
     public class LearnerAIProfile
     {
-        public int Id { get; set; }
-        public int StudentProfileId { get; set; }
+        public Guid Id { get; set; }
+        public Guid StudentProfileId { get; set; }
         public int DyslexiaSeverity { get; set; }
         public int ADHDSeverity { get; set; }
         public int ReadingScore { get; set; }

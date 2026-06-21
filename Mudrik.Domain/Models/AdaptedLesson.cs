@@ -5,9 +5,9 @@ namespace Mudrik.Domain.Entities
 {
     public class AdaptedLesson
     {
-        public int Id { get; set; }
-        public int StudentProfileId { get; set; }
-        public int StandardLessonId { get; set; }
+        public Guid Id { get; set; }
+        public Guid StudentProfileId { get; set; }
+        public Guid StandardLessonId { get; set; }
         public string AdaptationType { get; set; }
         public int AdaptationVersion { get; set; }
         public int TotalChunks { get; set; }

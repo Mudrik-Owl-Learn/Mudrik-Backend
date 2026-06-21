@@ -6,7 +6,7 @@ namespace Mudrik.Domain.Entities
 {
     public class ParentProfile
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string UserId { get; set; }
         public string FullName { get; set; }
         public string PhoneNumber { get; set; }

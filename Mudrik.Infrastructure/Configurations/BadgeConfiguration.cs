@@ -10,7 +10,10 @@ namespace Mudrik.Domain.Configurations
         {
             builder.ToTable("Badges");
 
-            builder.HasKey(b => b.Id); 
+            builder.HasKey(b => b.Id);
+
+            builder.Property(a => a.Id)
+                 .HasDefaultValueSql("NEWSEQUENTIALID()");
 
             builder.Property(b => b.Name)
                 .IsRequired()

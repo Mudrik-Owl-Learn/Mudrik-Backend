@@ -17,6 +17,9 @@ namespace Mudrik.Domain.Configurations
 
             builder.HasKey(s => s.Id);
 
+            builder.Property(a => a.Id)
+    .HasDefaultValueSql("NEWSEQUENTIALID()");
+
             builder.Property(s => s.FirstName)
                 .IsRequired()
                 .HasMaxLength(100);
@@ -62,9 +65,6 @@ namespace Mudrik.Domain.Configurations
             builder.Property(s => s.CreatedAt)
                 .IsRequired()
                 .HasDefaultValueSql("GETUTCDATE()");
-
-            builder.HasIndex(s => s.UserId)
-                .IsUnique();
 
             // Relationships
 
