@@ -17,8 +17,7 @@ namespace Mudrik.Application.Services.Auth.Commands.Register
         RegisterCommand request, CancellationToken cancellationToken)
         {
             var existingUser = await userManager.FindByEmailAsync(request.Email);
-            if (existingUser is not null)
-                throw new ValidationException("Email is already registered.");
+            if (existingUser is not null) throw new ValidationException("البريد الإلكتروني مسجل بالفعل");
 
             var user = new ApplicationUser
             {
