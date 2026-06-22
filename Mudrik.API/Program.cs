@@ -13,6 +13,8 @@ using Mudrik.Infrastructure.Realtime;
 using Mudrik.Infrastructure.Services;
 using Mudrik.Infrastructure.Services.Repositories;
 using Mudrik.Infrastructure.Settings;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Mudrik.API
 {
@@ -66,6 +68,17 @@ namespace Mudrik.API
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+
+            builder.Services.AddControllers()
+           .AddJsonOptions(options =>
+           {
+               options.JsonSerializerOptions.Converters.Add(
+                   new JsonStringEnumConverter());
+
+               options.JsonSerializerOptions.AllowTrailingCommas = true;
+               options.JsonSerializerOptions.ReadCommentHandling = JsonCommentHandling.Skip;
+
+           });
 
             var app = builder.Build();
 
