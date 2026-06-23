@@ -1,34 +1,28 @@
 using Microsoft.EntityFrameworkCore;
 using Mudrik.Application.Interfaces;
-using Mudrik.Domain.Entities;
 using Mudrik.Domain.Models;
 using Mudrik.Infrastructure.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Mudrik.Infrastructure.Services.Repositories
+namespace Mudrik.Infrastructure.Repositories
 {
     public class GamificationStreakRepository(AppDbContext context) : IGamificationStreakRepository
     {
-        private readonly AppDbContext context = context;
-
         public async Task<GamificationStreak?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
-        {
-            return await context.GamificationStreaks
+            => await context.GamificationStreaks
                 .FirstOrDefaultAsync(s => s.Id == id, cancellationToken);
-        }
 
-        public async Task<GamificationStreak?> GetByStudentProfileIdAsync(Guid studentProfileId, CancellationToken cancellationToken)
-        {
-            // Tracked (not AsNoTracking) on purpose: callers mutate the entity
-            // (ApplyXp / ContinueStreak / etc.) then call UpdateAsync in the same unit of work.
-            return await context.GamificationStreaks
+        public async Task<GamificationStreak?> GetByStudentProfileIdAsync(
+            Guid studentProfileId, CancellationToken cancellationToken)
+            => await context.GamificationStreaks
                 .FirstOrDefaultAsync(s => s.StudentProfileId == studentProfileId, cancellationToken);
-        }
 
-        public async Task<GamificationStreak> AddAsync(GamificationStreak streak, CancellationToken cancellationToken)
+        public async Task<GamificationStreak> AddAsync(
+            GamificationStreak streak, CancellationToken cancellationToken)
         {
             await context.GamificationStreaks.AddAsync(streak, cancellationToken);
             await context.SaveChangesAsync(cancellationToken);
@@ -48,8 +42,7 @@ namespace Mudrik.Infrastructure.Services.Repositories
             {
                 return await context.GamificationStreaks
                     .AsNoTracking()
-                    .Join(
-                        context.StudentProfiles.AsNoTracking(),
+                    .Join(context.StudentProfiles.AsNoTracking(),
                         streak => streak.StudentProfileId,
                         student => student.Id,
                         (streak, student) => new { streak, student.GradeLevel })

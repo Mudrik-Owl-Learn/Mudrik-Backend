@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Mudrik.Domain.Entities;
+using Mudrik.Domain.Models;
 using Mudrik.Domain.Models;
 
 namespace Mudrik.Domain.Configurations

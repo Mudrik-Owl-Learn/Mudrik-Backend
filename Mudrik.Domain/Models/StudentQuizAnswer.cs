@@ -1,6 +1,6 @@
 using System;
 
-namespace Mudrik.Domain.Entities
+namespace Mudrik.Domain.Models
 {
     public class StudentQuizAnswer
     {

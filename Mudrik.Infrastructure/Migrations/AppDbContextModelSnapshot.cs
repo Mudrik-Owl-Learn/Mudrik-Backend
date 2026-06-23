@@ -155,7 +155,7 @@ namespace Mudrik.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.AdaptedLesson", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.AdaptedLesson", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -218,7 +218,7 @@ namespace Mudrik.Infrastructure.Migrations
                     b.ToTable("AdaptedLessons", (string)null);
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.AgentGeneratedQuiz", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.AgentGeneratedQuiz", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -282,7 +282,89 @@ namespace Mudrik.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.Badge", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETUTCDATE()");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Mudrik.Domain.Models.Badge", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -323,7 +405,7 @@ namespace Mudrik.Infrastructure.Migrations
                     b.ToTable("Badges", (string)null);
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.GamificationStreak", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.GamificationStreak", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -374,7 +456,7 @@ namespace Mudrik.Infrastructure.Migrations
                     b.ToTable("GamificationStreaks", (string)null);
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.LearnerAIProfile", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.LearnerAIProfile", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -473,7 +555,7 @@ namespace Mudrik.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.LessonMicroChunk", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.LessonMicroChunk", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -534,7 +616,7 @@ namespace Mudrik.Infrastructure.Migrations
                     b.ToTable("LessonMicroChunks", (string)null);
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.ParentProfile", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.ParentProfile", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -573,7 +655,7 @@ namespace Mudrik.Infrastructure.Migrations
                     b.ToTable("ParentProfiles", (string)null);
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.QuizQuestion", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.QuizQuestion", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -626,7 +708,7 @@ namespace Mudrik.Infrastructure.Migrations
                     b.ToTable("QuizQuestions", (string)null);
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.StandardLesson", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.StandardLesson", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -683,7 +765,7 @@ namespace Mudrik.Infrastructure.Migrations
                     b.ToTable("StandardLessons", (string)null);
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.StudentBadge", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.StudentBadge", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -716,7 +798,7 @@ namespace Mudrik.Infrastructure.Migrations
                     b.ToTable("StudentBadges", (string)null);
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.StudentLessonState", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.StudentLessonState", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -775,7 +857,7 @@ namespace Mudrik.Infrastructure.Migrations
                     b.ToTable("StudentLessonStates", (string)null);
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.StudentProfile", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.StudentProfile", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -868,7 +950,7 @@ namespace Mudrik.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.StudentQuizAnswer", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.StudentQuizAnswer", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -916,7 +998,7 @@ namespace Mudrik.Infrastructure.Migrations
                     b.ToTable("StudentQuizAnswers", (string)null);
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.Subject", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.Subject", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -946,88 +1028,6 @@ namespace Mudrik.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Subjects", (string)null);
-                });
-
-            modelBuilder.Entity("Mudrik.Domain.Models.ApplicationUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETUTCDATE()");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("Mudrik.Domain.Models.XpTransaction", b =>
@@ -1139,15 +1139,15 @@ namespace Mudrik.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.AdaptedLesson", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.AdaptedLesson", b =>
                 {
-                    b.HasOne("Mudrik.Domain.Entities.StandardLesson", "StandardLesson")
+                    b.HasOne("Mudrik.Domain.Models.StandardLesson", "StandardLesson")
                         .WithMany("AdaptedLessons")
                         .HasForeignKey("StandardLessonId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Mudrik.Domain.Entities.StudentProfile", "StudentProfile")
+                    b.HasOne("Mudrik.Domain.Models.StudentProfile", "StudentProfile")
                         .WithMany("AdaptedLessons")
                         .HasForeignKey("StudentProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1158,21 +1158,21 @@ namespace Mudrik.Infrastructure.Migrations
                     b.Navigation("StudentProfile");
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.AgentGeneratedQuiz", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.AgentGeneratedQuiz", b =>
                 {
-                    b.HasOne("Mudrik.Domain.Entities.LessonMicroChunk", "LessonMicroChunk")
+                    b.HasOne("Mudrik.Domain.Models.LessonMicroChunk", "LessonMicroChunk")
                         .WithMany("AgentGeneratedQuizzes")
                         .HasForeignKey("LessonMicroChunkId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Mudrik.Domain.Entities.StandardLesson", "StandardLesson")
+                    b.HasOne("Mudrik.Domain.Models.StandardLesson", "StandardLesson")
                         .WithMany("AgentGeneratedQuizzes")
                         .HasForeignKey("StandardLessonId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Mudrik.Domain.Entities.StudentProfile", "StudentProfile")
+                    b.HasOne("Mudrik.Domain.Models.StudentProfile", "StudentProfile")
                         .WithMany("AgentGeneratedQuizzes")
                         .HasForeignKey("StudentProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1185,37 +1185,37 @@ namespace Mudrik.Infrastructure.Migrations
                     b.Navigation("StudentProfile");
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.GamificationStreak", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.GamificationStreak", b =>
                 {
-                    b.HasOne("Mudrik.Domain.Entities.StudentProfile", "StudentProfile")
+                    b.HasOne("Mudrik.Domain.Models.StudentProfile", "StudentProfile")
                         .WithOne("GamificationStreak")
-                        .HasForeignKey("Mudrik.Domain.Entities.GamificationStreak", "StudentProfileId")
+                        .HasForeignKey("Mudrik.Domain.Models.GamificationStreak", "StudentProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("StudentProfile");
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.LearnerAIProfile", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.LearnerAIProfile", b =>
                 {
-                    b.HasOne("Mudrik.Domain.Entities.StudentProfile", "StudentProfile")
+                    b.HasOne("Mudrik.Domain.Models.StudentProfile", "StudentProfile")
                         .WithOne("LearnerAIProfile")
-                        .HasForeignKey("Mudrik.Domain.Entities.LearnerAIProfile", "StudentProfileId")
+                        .HasForeignKey("Mudrik.Domain.Models.LearnerAIProfile", "StudentProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("StudentProfile");
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.LessonMicroChunk", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.LessonMicroChunk", b =>
                 {
-                    b.HasOne("Mudrik.Domain.Entities.AdaptedLesson", "AdaptedLesson")
+                    b.HasOne("Mudrik.Domain.Models.AdaptedLesson", "AdaptedLesson")
                         .WithMany("LessonMicroChunks")
                         .HasForeignKey("AdaptedLessonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Mudrik.Domain.Entities.StudentProfile", "StudentProfile")
+                    b.HasOne("Mudrik.Domain.Models.StudentProfile", "StudentProfile")
                         .WithMany("LessonMicroChunks")
                         .HasForeignKey("StudentProfileId")
                         .OnDelete(DeleteBehavior.ClientCascade)
@@ -1226,26 +1226,26 @@ namespace Mudrik.Infrastructure.Migrations
                     b.Navigation("StudentProfile");
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.ParentProfile", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.ParentProfile", b =>
                 {
                     b.HasOne("Mudrik.Domain.Models.ApplicationUser", "User")
                         .WithOne("ParentProfile")
-                        .HasForeignKey("Mudrik.Domain.Entities.ParentProfile", "UserId")
+                        .HasForeignKey("Mudrik.Domain.Models.ParentProfile", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.QuizQuestion", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.QuizQuestion", b =>
                 {
-                    b.HasOne("Mudrik.Domain.Entities.StandardLesson", "StandardLesson")
+                    b.HasOne("Mudrik.Domain.Models.StandardLesson", "StandardLesson")
                         .WithMany("QuizQuestions")
                         .HasForeignKey("StandardLessonId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Mudrik.Domain.Entities.Subject", "Subject")
+                    b.HasOne("Mudrik.Domain.Models.Subject", "Subject")
                         .WithMany("QuizQuestions")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -1256,9 +1256,9 @@ namespace Mudrik.Infrastructure.Migrations
                     b.Navigation("Subject");
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.StandardLesson", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.StandardLesson", b =>
                 {
-                    b.HasOne("Mudrik.Domain.Entities.Subject", "Subject")
+                    b.HasOne("Mudrik.Domain.Models.Subject", "Subject")
                         .WithMany("StandardLessons")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -1267,15 +1267,15 @@ namespace Mudrik.Infrastructure.Migrations
                     b.Navigation("Subject");
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.StudentBadge", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.StudentBadge", b =>
                 {
-                    b.HasOne("Mudrik.Domain.Entities.Badge", "Badge")
+                    b.HasOne("Mudrik.Domain.Models.Badge", "Badge")
                         .WithMany("StudentBadges")
                         .HasForeignKey("BadgeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Mudrik.Domain.Entities.StudentProfile", "StudentProfile")
+                    b.HasOne("Mudrik.Domain.Models.StudentProfile", "StudentProfile")
                         .WithMany("StudentBadges")
                         .HasForeignKey("StudentProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1286,15 +1286,15 @@ namespace Mudrik.Infrastructure.Migrations
                     b.Navigation("StudentProfile");
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.StudentLessonState", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.StudentLessonState", b =>
                 {
-                    b.HasOne("Mudrik.Domain.Entities.StandardLesson", "StandardLesson")
+                    b.HasOne("Mudrik.Domain.Models.StandardLesson", "StandardLesson")
                         .WithMany("StudentLessonStates")
                         .HasForeignKey("StandardLessonId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Mudrik.Domain.Entities.StudentProfile", "StudentProfile")
+                    b.HasOne("Mudrik.Domain.Models.StudentProfile", "StudentProfile")
                         .WithMany("StudentLessonStates")
                         .HasForeignKey("StudentProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1305,9 +1305,9 @@ namespace Mudrik.Infrastructure.Migrations
                     b.Navigation("StudentProfile");
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.StudentProfile", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.StudentProfile", b =>
                 {
-                    b.HasOne("Mudrik.Domain.Entities.ParentProfile", "ParentProfile")
+                    b.HasOne("Mudrik.Domain.Models.ParentProfile", "ParentProfile")
                         .WithMany("StudentProfiles")
                         .HasForeignKey("ParentProfileId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -1316,21 +1316,21 @@ namespace Mudrik.Infrastructure.Migrations
                     b.Navigation("ParentProfile");
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.StudentQuizAnswer", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.StudentQuizAnswer", b =>
                 {
-                    b.HasOne("Mudrik.Domain.Entities.AgentGeneratedQuiz", "AgentGeneratedQuiz")
+                    b.HasOne("Mudrik.Domain.Models.AgentGeneratedQuiz", "AgentGeneratedQuiz")
                         .WithMany("StudentQuizAnswers")
                         .HasForeignKey("AgentGeneratedQuizId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Mudrik.Domain.Entities.QuizQuestion", "QuizQuestion")
+                    b.HasOne("Mudrik.Domain.Models.QuizQuestion", "QuizQuestion")
                         .WithMany("StudentQuizAnswers")
                         .HasForeignKey("QuizQuestionId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Mudrik.Domain.Entities.StudentProfile", "StudentProfile")
+                    b.HasOne("Mudrik.Domain.Models.StudentProfile", "StudentProfile")
                         .WithMany("StudentQuizAnswers")
                         .HasForeignKey("StudentProfileId")
                         .OnDelete(DeleteBehavior.ClientCascade)
@@ -1345,13 +1345,13 @@ namespace Mudrik.Infrastructure.Migrations
 
             modelBuilder.Entity("Mudrik.Domain.Models.XpTransaction", b =>
                 {
-                    b.HasOne("Mudrik.Domain.Entities.GamificationStreak", "GamificationStreak")
+                    b.HasOne("Mudrik.Domain.Models.GamificationStreak", "GamificationStreak")
                         .WithMany("XpTransactions")
                         .HasForeignKey("GamificationStreakId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Mudrik.Domain.Entities.StudentProfile", "StudentProfile")
+                    b.HasOne("Mudrik.Domain.Models.StudentProfile", "StudentProfile")
                         .WithMany("XpTransactions")
                         .HasForeignKey("StudentProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1362,42 +1362,47 @@ namespace Mudrik.Infrastructure.Migrations
                     b.Navigation("StudentProfile");
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.AdaptedLesson", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.AdaptedLesson", b =>
                 {
                     b.Navigation("LessonMicroChunks");
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.AgentGeneratedQuiz", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.AgentGeneratedQuiz", b =>
                 {
                     b.Navigation("StudentQuizAnswers");
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.Badge", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("ParentProfile");
+                });
+
+            modelBuilder.Entity("Mudrik.Domain.Models.Badge", b =>
                 {
                     b.Navigation("StudentBadges");
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.GamificationStreak", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.GamificationStreak", b =>
                 {
                     b.Navigation("XpTransactions");
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.LessonMicroChunk", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.LessonMicroChunk", b =>
                 {
                     b.Navigation("AgentGeneratedQuizzes");
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.ParentProfile", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.ParentProfile", b =>
                 {
                     b.Navigation("StudentProfiles");
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.QuizQuestion", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.QuizQuestion", b =>
                 {
                     b.Navigation("StudentQuizAnswers");
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.StandardLesson", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.StandardLesson", b =>
                 {
                     b.Navigation("AdaptedLessons");
 
@@ -1408,7 +1413,7 @@ namespace Mudrik.Infrastructure.Migrations
                     b.Navigation("StudentLessonStates");
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.StudentProfile", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.StudentProfile", b =>
                 {
                     b.Navigation("AdaptedLessons");
 
@@ -1429,16 +1434,11 @@ namespace Mudrik.Infrastructure.Migrations
                     b.Navigation("XpTransactions");
                 });
 
-            modelBuilder.Entity("Mudrik.Domain.Entities.Subject", b =>
+            modelBuilder.Entity("Mudrik.Domain.Models.Subject", b =>
                 {
                     b.Navigation("QuizQuestions");
 
                     b.Navigation("StandardLessons");
-                });
-
-            modelBuilder.Entity("Mudrik.Domain.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("ParentProfile");
                 });
 #pragma warning restore 612, 618
         }

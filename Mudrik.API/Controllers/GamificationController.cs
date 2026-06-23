@@ -8,6 +8,7 @@ using Mudrik.Application.Services.Gamification.Queries.GetLeaderboard;
 using Mudrik.Application.Services.Gamification.Queries.GetStreakStatus;
 using Mudrik.Application.Services.Gamification.Queries.GetXpHistory;
 using Mudrik.Application.Services.Gamification.Queries.GetXpTransactionById;
+using System;
 
 namespace Mudrik.API.Controllers
 {
@@ -16,8 +17,6 @@ namespace Mudrik.API.Controllers
     //[Authorize]
     public class GamificationController(IMediator mediator) : ControllerBase
     {
-        // ---- XpTransactions ----
-
         [HttpPost("xp/award")]
         public async Task<IActionResult> AwardXp([FromBody] AwardXpCommand command)
         {
@@ -42,8 +41,6 @@ namespace Mudrik.API.Controllers
             return Ok(result);
         }
 
-        // ---- GamificationStreaks ----
-
         [HttpPost("streaks/record-activity")]
         public async Task<IActionResult> RecordDailyActivity([FromBody] RecordDailyActivityCommand command)
         {
@@ -65,8 +62,6 @@ namespace Mudrik.API.Controllers
             return Ok(result);
         }
 
-        // ---- Leaderboard (derived from GamificationStreaks) ----
-
         [HttpGet("leaderboard")]
         public async Task<IActionResult> GetLeaderboard([FromQuery] GetLeaderboardQuery query)
         {
@@ -75,3 +70,4 @@ namespace Mudrik.API.Controllers
         }
     }
 }
+

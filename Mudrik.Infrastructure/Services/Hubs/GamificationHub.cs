@@ -1,22 +1,10 @@
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
+using System;
 using System.Threading.Tasks;
 
-namespace Mudrik.Infrastructure.Services.Hubs
+namespace Mudrik.API.Hubs
 {
-    /// <summary>
-    /// Realtime hub for gamification feedback (XP, levels, streaks, badges).
-    /// Each connected client joins group "student:{studentProfileId}" so the
-    /// server can target pushes to exactly one learner's open sessions
-    /// (e.g. same child on tablet + phone, or a parent observing via Child Switcher).
-    ///
-    /// Route: /hubs/gamification
-    /// Client events (server -> client), matching Project-context.md:
-    ///   OnPointsEarned(XpAwardResultDto)
-    ///   OnBadgeUnlocked(BadgeUnlockedPayload)
-    ///   OnStreakUpdated(StreakUpdateResultDto)
-    ///   OnLevelUp(LevelUpPayload)
-    /// </summary>
     [Authorize]
     public class GamificationHub : Hub
     {
@@ -26,9 +14,7 @@ namespace Mudrik.Infrastructure.Services.Hubs
         {
             var studentProfileId = GetStudentProfileIdFromContext();
             if (studentProfileId.HasValue)
-            {
                 await Groups.AddToGroupAsync(Context.ConnectionId, StudentGroupName(studentProfileId.Value));
-            }
 
             await base.OnConnectedAsync();
         }
@@ -37,23 +23,16 @@ namespace Mudrik.Infrastructure.Services.Hubs
         {
             var studentProfileId = GetStudentProfileIdFromContext();
             if (studentProfileId.HasValue)
-            {
                 await Groups.RemoveFromGroupAsync(Context.ConnectionId, StudentGroupName(studentProfileId.Value));
-            }
 
             await base.OnDisconnectedAsync(exception);
         }
 
-        /// <summary>Used by a parent session to observe a specific child's live updates from /parent/dashboard.</summary>
         public async Task SubscribeToStudent(Guid studentProfileId)
-        {
-            await Groups.AddToGroupAsync(Context.ConnectionId, StudentGroupName(studentProfileId));
-        }
+            => await Groups.AddToGroupAsync(Context.ConnectionId, StudentGroupName(studentProfileId));
 
         public async Task UnsubscribeFromStudent(Guid studentProfileId)
-        {
-            await Groups.RemoveFromGroupAsync(Context.ConnectionId, StudentGroupName(studentProfileId));
-        }
+            => await Groups.RemoveFromGroupAsync(Context.ConnectionId, StudentGroupName(studentProfileId));
 
         private Guid? GetStudentProfileIdFromContext()
         {

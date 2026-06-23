@@ -1,16 +1,7 @@
-using Mudrik.Domain.Entities;
-using Mudrik.Domain.Models;
 using System;
 
-namespace Mudrik.Domain.Entities
+namespace Mudrik.Domain.Models
 {
-    /// <summary>
-    /// Maps 1:1 to the GamificationStreaks table in the ERD.
-    /// This is the aggregate root for a student's gamification state —
-    /// TotalPoints and CurrentLevel are persisted columns, not computed
-    /// on the fly from XpTransactions. Every XpTransaction references
-    /// the GamificationStreak row that was current at award time.
-    /// </summary>
     public class GamificationStreak
     {
         public Guid Id { get; set; }
@@ -27,13 +18,13 @@ namespace Mudrik.Domain.Entities
         public StudentProfile StudentProfile { get; set; }
         public ICollection<XpTransaction> XpTransactions { get; set; } = new List<XpTransaction>();
 
-
-        private GamificationStreak() { } // EF Core
+        private GamificationStreak() { }
 
         public static GamificationStreak CreateForStudent(Guid studentProfileId, DateOnly today, int initialFreezeTokens = 1)
         {
             return new GamificationStreak
             {
+                Id = Guid.NewGuid(),
                 StudentProfileId = studentProfileId,
                 TotalPoints = 0,
                 CurrentLevel = 1,
@@ -45,7 +36,6 @@ namespace Mudrik.Domain.Entities
             };
         }
 
-        /// <summary>Applies XP earned in a single transaction to the running total and recalculates level.</summary>
         public void ApplyXp(int totalXpAwarded, int newLevel)
         {
             TotalPoints += totalXpAwarded;
@@ -85,5 +75,3 @@ namespace Mudrik.Domain.Entities
         }
     }
 }
-
-

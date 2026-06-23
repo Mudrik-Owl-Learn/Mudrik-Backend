@@ -11,7 +11,7 @@ namespace Mudrik.Application.Services.StudentProfile.Commands.AddStudentProfile
     {
         public async Task<Guid> Handle(AddStudentProfileCommand request, CancellationToken cancellationToken)
         {
-            var studentProfile = new Domain.Entities.StudentProfile
+            var studentProfile = new Domain.Models.StudentProfile
             {
                 //Id = new Guid(),
                 ParentProfileId = request.ParentProfileId,
