@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Mudrik.Domain.Entities;
 using Mudrik.Domain.Models;
 using System;
 using System.Collections.Generic;

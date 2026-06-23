@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Mudrik.Domain.Entities
+namespace Mudrik.Domain.Models
 {
     public class Badge
     {
@@ -14,5 +14,28 @@ namespace Mudrik.Domain.Entities
 
         // Navigation properties
         public ICollection<StudentBadge> StudentBadges { get; set; } = new List<StudentBadge>();
+
+        private Badge() { }
+
+        public static Badge Create(
+            string name,
+            string description,
+            string rarity,
+            string imageUrl,
+            string eligibilityCriteriaJson,
+            bool isActive = true)
+        {
+            return new Badge
+            {
+                Id = Guid.NewGuid(),
+                Name = name,
+                Description = description,
+                Rarity = rarity,
+                ImageUrl = imageUrl,
+                EligibilityCriteriaJson = eligibilityCriteriaJson,
+                IsActive = isActive
+            };
+        }
     }
+   
 }

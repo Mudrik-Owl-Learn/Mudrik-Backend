@@ -1,10 +1,12 @@
+
 using MediatR;
 using Mudrik.Application.Interfaces;
+using Mudrik.Application.Services.Badges.Commands.CheckAndAwardBadges;
 using Mudrik.Application.Services.Gamification.DTOs;
 using Mudrik.Application.Services.Gamification.Helpers;
-using Mudrik.Domain.Entities;
 using Mudrik.Domain.Models;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,16 +15,18 @@ namespace Mudrik.Application.Services.Gamification.Commands.AwardXp
     public class AwardXpCommandHandler(
         IXpTransactionRepository xpRepository,
         IGamificationStreakRepository streakRepository,
-        IGamificationNotifier notifier)
+        IGamificationNotifier notifier,
+        IMediator mediator)
         : IRequestHandler<AwardXpCommand, XpAwardResultDto>
     {
         public async Task<XpAwardResultDto> Handle(AwardXpCommand request, CancellationToken cancellationToken)
         {
             var today = DateOnly.FromDateTime(DateTime.UtcNow);
 
-            // Every student must have a GamificationStreaks row before earning XP —
-            // create it lazily on first award (e.g. first MICRO_QUIZ_CORRECT after diagnostic).
-            var streak = await streakRepository.GetByStudentProfileIdAsync(request.StudentProfileId, cancellationToken);
+            // Lazy creation — every student gets a GamificationStreaks row on first XP award.
+            var streak = await streakRepository.GetByStudentProfileIdAsync(
+                request.StudentProfileId, cancellationToken);
+
             if (streak is null)
             {
                 streak = GamificationStreak.CreateForStudent(request.StudentProfileId, today);
@@ -44,7 +48,9 @@ namespace Mudrik.Application.Services.Gamification.Commands.AwardXp
 
             await xpRepository.AddAsync(transaction, cancellationToken);
 
-            var newLevel = LevelCalculator.GetLevelForTotalPoints(streak.TotalPoints + transaction.TotalXpAwarded);
+            var newTotalPoints = streak.TotalPoints + transaction.TotalXpAwarded;
+            var newLevel = LevelCalculator.GetLevelForTotalPoints(newTotalPoints);
+
             streak.ApplyXp(transaction.TotalXpAwarded, newLevel);
             await streakRepository.UpdateAsync(streak, cancellationToken);
 
@@ -64,12 +70,15 @@ namespace Mudrik.Application.Services.Gamification.Commands.AwardXp
                 LeveledUp: leveledUp
             );
 
-            // Realtime push — OnPointsEarned always, OnLevelUp only when it actually changed.
+            // Realtime push.
             await notifier.NotifyPointsEarnedAsync(request.StudentProfileId, result);
             if (leveledUp)
-            {
                 await notifier.NotifyLevelUpAsync(request.StudentProfileId, streak.CurrentLevel);
-            }
+
+            // Chain: XP awarded → check badge eligibility immediately.
+            await mediator.Send(
+                new CheckAndAwardBadgesCommand(request.StudentProfileId),
+                cancellationToken);
 
             return result;
         }

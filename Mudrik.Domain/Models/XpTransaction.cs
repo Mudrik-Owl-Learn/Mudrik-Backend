@@ -1,14 +1,7 @@
-using Mudrik.Domain.Entities;
 using System;
 
 namespace Mudrik.Domain.Models
 {
-    /// <summary>
-    /// Maps 1:1 to the XpTransactions table in the ERD.
-    /// Append-only audit log: every row records exactly what was awarded,
-    /// why (EventType + polymorphic Reference), and which GamificationStreak
-    /// snapshot it was applied against.
-    /// </summary>
     public class XpTransaction
     {
         public Guid Id { get; set; }
@@ -27,9 +20,8 @@ namespace Mudrik.Domain.Models
         public StudentProfile? StudentProfile { get; set; }
         public GamificationStreak? GamificationStreak { get; set; }
 
-        private XpTransaction() { } // EF Core
+        private XpTransaction() { }
 
-       
         public static XpTransaction Create(
             Guid studentProfileId,
             Guid gamificationStreakId,
@@ -40,17 +32,18 @@ namespace Mudrik.Domain.Models
             int? referenceId,
             string? referenceType)
         {
-            var totalXpAwarded = (int)Math.Round((baseXp + bonusXp) * streakMultiplier, MidpointRounding.AwayFromZero);
+            var total = (int)Math.Round((baseXp + bonusXp) * streakMultiplier, MidpointRounding.AwayFromZero);
 
             return new XpTransaction
             {
+                Id = Guid.NewGuid(),
                 StudentProfileId = studentProfileId,
                 GamificationStreakId = gamificationStreakId,
                 EventType = eventType,
                 BaseXp = baseXp,
                 BonusXp = bonusXp,
                 StreakMultiplier = streakMultiplier,
-                TotalXpAwarded = totalXpAwarded,
+                TotalXpAwarded = total,
                 ReferenceId = referenceId,
                 ReferenceType = referenceType,
                 AwardedAt = DateTime.UtcNow
@@ -58,5 +51,3 @@ namespace Mudrik.Domain.Models
         }
     }
 }
-
-

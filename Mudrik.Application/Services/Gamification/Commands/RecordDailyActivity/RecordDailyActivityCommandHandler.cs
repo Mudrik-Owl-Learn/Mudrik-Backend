@@ -1,7 +1,6 @@
 using MediatR;
 using Mudrik.Application.Interfaces;
 using Mudrik.Application.Services.Gamification.DTOs;
-using Mudrik.Domain.Entities;
 using Mudrik.Domain.Models;
 using System;
 using System.Threading;

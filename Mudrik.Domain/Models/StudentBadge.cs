@@ -1,7 +1,9 @@
+using Mudrik.Domain.Models;
 using System;
 
-namespace Mudrik.Domain.Entities
+namespace Mudrik.Domain.Models
 {
+
     public class StudentBadge
     {
         public Guid Id { get; set; }
@@ -13,5 +15,25 @@ namespace Mudrik.Domain.Entities
         // Navigation properties
         public StudentProfile? StudentProfile { get; set; }
         public Badge? Badge { get; set; }
+
+        private StudentBadge() { }
+
+        public static StudentBadge Create(Guid studentProfileId, Guid badgeId)
+        {
+            return new StudentBadge
+            {
+                Id = Guid.NewGuid(),
+                StudentProfileId = studentProfileId,
+                BadgeId = badgeId,
+                HasBeenDisplayed = false,
+                EarnedAt = DateTime.UtcNow
+            };
+        }
+
+        public void MarkAsDisplayed()
+        {
+            HasBeenDisplayed = true;
+        }
     }
+
 }

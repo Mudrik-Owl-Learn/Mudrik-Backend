@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Mudrik.Application.Interfaces;
 using Mudrik.Domain.Configurations;
-using Mudrik.Domain.Entities;
+using Mudrik.Domain.Models;
 using Mudrik.Domain.Models;
 using System;
 using System.Collections.Generic;

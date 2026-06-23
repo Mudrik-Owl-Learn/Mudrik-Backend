@@ -10,8 +10,8 @@ using Mudrik.Domain.Models;
 using Mudrik.Infrastructure.Data;
 using Mudrik.Infrastructure.DataSeeding;
 using Mudrik.Infrastructure.Realtime;
+using Mudrik.Infrastructure.Repositories;
 using Mudrik.Infrastructure.Services;
-using Mudrik.Infrastructure.Services.Repositories;
 using Mudrik.Infrastructure.Settings;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -48,6 +48,8 @@ namespace Mudrik.API
             builder.Services.AddScoped<IXpTransactionRepository, XpTransactionRepository>();
             builder.Services.AddScoped<IGamificationStreakRepository, GamificationStreakRepository>();
             builder.Services.AddScoped<IStudentDirectoryLookup, StudentDirectoryLookup>();
+            builder.Services.AddScoped<IBadgeEligibilityService, BadgeEligibilityService>();
+            builder.Services.AddScoped<IBadgeRepository, BadgeRepository>();
 
             //builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<AwardXpCommand>());
             //builder.Services.AddValidatorsFromAssemblyContaining<AwardXpCommandValidator>();

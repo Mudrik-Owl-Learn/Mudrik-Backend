@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Mudrik.Domain.Entities
+namespace Mudrik.Domain.Models
 {
     public class AdaptedLesson
     {
