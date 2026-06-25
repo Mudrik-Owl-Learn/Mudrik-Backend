@@ -28,7 +28,7 @@ namespace Mudrik.Application.Services.StudentProfile.Commands.AddStudentProfile
                 InterestsJson = request.InterestsJson,
                 LearningStylePref = request.LearningStylePref,
                 PersonalityTag = request.PersonalityTag,
-                OnboardingComplete = true
+                OnboardingComplete = false
             };
 
 

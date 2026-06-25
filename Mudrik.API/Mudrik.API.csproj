@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Mudrik.Infrastructure\Mudrik.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Requests\AgentGeneratedQuizzRequests\" />
+  </ItemGroup>
+
 </Project>

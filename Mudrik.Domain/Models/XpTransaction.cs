@@ -12,7 +12,7 @@ namespace Mudrik.Domain.Models
         public int BonusXp { get; set; }
         public decimal StreakMultiplier { get; set; }
         public int TotalXpAwarded { get; set; }
-        public int? ReferenceId { get; set; }
+        public Guid? ReferenceId { get; set; }
         public string ReferenceType { get; set; }
         public DateTime AwardedAt { get; set; }
 
@@ -29,7 +29,7 @@ namespace Mudrik.Domain.Models
             int baseXp,
             int bonusXp,
             decimal streakMultiplier,
-            int? referenceId,
+            Guid? referenceId,
             string? referenceType)
         {
             var total = (int)Math.Round((baseXp + bonusXp) * streakMultiplier, MidpointRounding.AwayFromZero);

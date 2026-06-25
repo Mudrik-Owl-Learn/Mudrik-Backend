@@ -8,7 +8,7 @@ namespace Mudrik.Application.Services.Gamification.Commands.AwardXp
         string EventType,
         int BaseXp,
         int BonusXp,
-        int? ReferenceId,
+        Guid? ReferenceId,
         string? ReferenceType
     ) : IRequest<XpAwardResultDto>;
 }
