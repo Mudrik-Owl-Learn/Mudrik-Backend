@@ -11,7 +11,7 @@ namespace Mudrik.Application.Services.Gamification.DTOs
         int BonusXp,
         decimal StreakMultiplier,
         int TotalXpAwarded,
-        int? ReferenceId,
+        Guid? ReferenceId,
         string? ReferenceType,
         DateTime AwardedAt
     );

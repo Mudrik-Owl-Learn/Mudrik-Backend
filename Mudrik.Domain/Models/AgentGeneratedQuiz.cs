@@ -7,7 +7,7 @@ namespace Mudrik.Domain.Models
     {
         public Guid Id { get; set; }
         public Guid StudentProfileId { get; set; }
-        public Guid LessonMicroChunkId { get; set; }
+        public Guid? LessonMicroChunkId { get; set; }
         public Guid StandardLessonId { get; set; }
         public int AttemptNumber { get; set; }
         public int AudioReplayCount { get; set; }
@@ -15,12 +15,13 @@ namespace Mudrik.Domain.Models
         public bool IsPassed { get; set; }
         public int TotalTimeSeconds { get; set; }
         public DateTime StartedAt { get; set; } = DateTime.UtcNow;
-        public DateTime? CompletedAt { get; set; } 
+        public DateTime? CompletedAt { get; set; }
 
         // Navigation properties
         public StudentProfile? StudentProfile { get; set; }
         public LessonMicroChunk? LessonMicroChunk { get; set; }
         public StandardLesson StandardLesson { get; set; }
         public ICollection<StudentQuizAnswer> StudentQuizAnswers { get; set; } = new List<StudentQuizAnswer>();
+        public ICollection<AgentGeneratedQuizQuestion> AgentGeneratedQuizQuestions { get; set; } = new List<AgentGeneratedQuizQuestion>();
     }
 }

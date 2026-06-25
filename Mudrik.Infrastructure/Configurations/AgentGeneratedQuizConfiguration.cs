@@ -44,9 +44,19 @@ namespace Mudrik.Domain.Configurations
                 .IsRequired()
                 .HasDefaultValueSql("GETUTCDATE()");
 
-            // Prevents duplicate quiz sessions for the same chunk and attempt number
+            // Split into two filtered unique indexes since LessonMicroChunkId is now nullable.
+            // SQL Server treats every NULL as distinct in a unique index, so a single
+            // combined index would no longer prevent duplicate attempts for lesson-only quizzes.
+
+            // Enforces uniqueness for chunk-based quiz attempts
             builder.HasIndex(q => new { q.StudentProfileId, q.LessonMicroChunkId, q.AttemptNumber })
-                .IsUnique();
+                .IsUnique()
+                .HasFilter("[LessonMicroChunkId] IS NOT NULL");
+
+            // Enforces uniqueness for lesson-only quiz attempts (no chunk)
+            builder.HasIndex(q => new { q.StudentProfileId, q.StandardLessonId, q.AttemptNumber })
+                .IsUnique()
+                .HasFilter("[LessonMicroChunkId] IS NULL");
 
             // Relationships
             // AgentGeneratedQuizzes.StudentProfileId -> StudentProfiles.Id : CASCADE
@@ -55,7 +65,7 @@ namespace Mudrik.Domain.Configurations
                 .HasForeignKey(q => q.StudentProfileId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // AgentGeneratedQuizzes.LessonMicroChunkId -> LessonMicroChunks.Id : RESTRICT
+            // AgentGeneratedQuizzes.LessonMicroChunkId -> LessonMicroChunks.Id : RESTRICT (optional FK)
             builder.HasOne(q => q.LessonMicroChunk)
                 .WithMany(m => m.AgentGeneratedQuizzes)
                 .HasForeignKey(q => q.LessonMicroChunkId)
@@ -68,10 +78,7 @@ namespace Mudrik.Domain.Configurations
                 .OnDelete(DeleteBehavior.Restrict);
 
             // StudentQuizAnswers.AgentGeneratedQuizId -> AgentGeneratedQuizzes.Id : CASCADE
-            builder.HasMany(q => q.StudentQuizAnswers)
-                .WithOne(a => a.AgentGeneratedQuiz)
-                .HasForeignKey(a => a.AgentGeneratedQuizId)
-                .OnDelete(DeleteBehavior.Cascade);
+            // Declared from StudentQuizAnswerConfiguration instead — removed here to avoid duplication.
         }
     }
 }

@@ -241,7 +241,7 @@ namespace Mudrik.Infrastructure.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<Guid>("LessonMicroChunkId")
+                    b.Property<Guid?>("LessonMicroChunkId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("ScorePercent")
@@ -272,7 +272,12 @@ namespace Mudrik.Infrastructure.Migrations
                     b.HasIndex("StandardLessonId");
 
                     b.HasIndex("StudentProfileId", "LessonMicroChunkId", "AttemptNumber")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[LessonMicroChunkId] IS NOT NULL");
+
+                    b.HasIndex("StudentProfileId", "StandardLessonId", "AttemptNumber")
+                        .IsUnique()
+                        .HasFilter("[LessonMicroChunkId] IS NULL");
 
                     b.ToTable("AgentGeneratedQuizzes", null, t =>
                         {
@@ -280,6 +285,29 @@ namespace Mudrik.Infrastructure.Migrations
 
                             t.HasCheckConstraint("CK_AgentGeneratedQuizzes_ScorePercent", "[ScorePercent] BETWEEN 0.00 AND 100.00");
                         });
+                });
+
+            modelBuilder.Entity("Mudrik.Domain.Models.AgentGeneratedQuizQuestion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid>("AgentGeneratedQuizId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("QuizQuestionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AgentGeneratedQuizId");
+
+                    b.HasIndex("QuizQuestionId");
+
+                    b.ToTable("AgentGeneratedQuizQuestion");
                 });
 
             modelBuilder.Entity("Mudrik.Domain.Models.ApplicationUser", b =>
@@ -1060,8 +1088,8 @@ namespace Mudrik.Infrastructure.Migrations
                     b.Property<Guid>("GamificationStreakId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("ReferenceId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("ReferenceId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ReferenceType")
                         .IsRequired()
@@ -1163,8 +1191,7 @@ namespace Mudrik.Infrastructure.Migrations
                     b.HasOne("Mudrik.Domain.Models.LessonMicroChunk", "LessonMicroChunk")
                         .WithMany("AgentGeneratedQuizzes")
                         .HasForeignKey("LessonMicroChunkId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Mudrik.Domain.Models.StandardLesson", "StandardLesson")
                         .WithMany("AgentGeneratedQuizzes")
@@ -1183,6 +1210,25 @@ namespace Mudrik.Infrastructure.Migrations
                     b.Navigation("StandardLesson");
 
                     b.Navigation("StudentProfile");
+                });
+
+            modelBuilder.Entity("Mudrik.Domain.Models.AgentGeneratedQuizQuestion", b =>
+                {
+                    b.HasOne("Mudrik.Domain.Models.AgentGeneratedQuiz", "AgentGeneratedQuiz")
+                        .WithMany("AgentGeneratedQuizQuestions")
+                        .HasForeignKey("AgentGeneratedQuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Mudrik.Domain.Models.QuizQuestion", "QuizQuestion")
+                        .WithMany("AgentGeneratedQuizQuestions")
+                        .HasForeignKey("QuizQuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AgentGeneratedQuiz");
+
+                    b.Navigation("QuizQuestion");
                 });
 
             modelBuilder.Entity("Mudrik.Domain.Models.GamificationStreak", b =>
@@ -1369,6 +1415,8 @@ namespace Mudrik.Infrastructure.Migrations
 
             modelBuilder.Entity("Mudrik.Domain.Models.AgentGeneratedQuiz", b =>
                 {
+                    b.Navigation("AgentGeneratedQuizQuestions");
+
                     b.Navigation("StudentQuizAnswers");
                 });
 
@@ -1399,6 +1447,8 @@ namespace Mudrik.Infrastructure.Migrations
 
             modelBuilder.Entity("Mudrik.Domain.Models.QuizQuestion", b =>
                 {
+                    b.Navigation("AgentGeneratedQuizQuestions");
+
                     b.Navigation("StudentQuizAnswers");
                 });
 

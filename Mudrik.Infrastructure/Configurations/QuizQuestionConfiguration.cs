@@ -52,10 +52,10 @@ namespace Mudrik.Domain.Configurations
                 .OnDelete(DeleteBehavior.Restrict);
 
             // StudentQuizAnswers.QuizQuestionId -> QuizQuestions.Id : RESTRICT
-            builder.HasMany(q => q.StudentQuizAnswers)
-                .WithOne(a => a.QuizQuestion)
-                .HasForeignKey(a => a.QuizQuestionId)
-                .OnDelete(DeleteBehavior.Restrict);
+            //builder.HasMany(q => q.StudentQuizAnswers)
+            //    .WithOne(a => a.QuizQuestion)
+            //    .HasForeignKey(a => a.QuizQuestionId)
+            //    .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
