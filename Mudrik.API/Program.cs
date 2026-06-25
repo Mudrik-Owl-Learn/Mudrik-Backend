@@ -25,6 +25,7 @@ namespace Mudrik.API
     {
         public static async Task Main(string[] args)
         {
+            string txt = "";
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
@@ -89,6 +90,17 @@ namespace Mudrik.API
 
            });
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(txt,
+                builder =>
+                {
+                    builder.AllowAnyOrigin();
+                    builder.AllowAnyMethod();
+                    builder.AllowAnyHeader();
+                });
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -101,6 +113,7 @@ namespace Mudrik.API
 
             app.UseHttpsRedirection();
 
+            app.UseCors(txt);
             app.UseAuthorization();
             using (var scope = app.Services.CreateScope())
             {

@@ -20,5 +20,6 @@ namespace Mudrik.Domain.Models
         public StandardLesson? StandardLesson { get; set; }
         public Subject? Subject { get; set; }
         public ICollection<StudentQuizAnswer> StudentQuizAnswers { get; set; } = new List<StudentQuizAnswer>();
+        public ICollection<AgentGeneratedQuizQuestion> AgentGeneratedQuizQuestions { get; set; } = new List<AgentGeneratedQuizQuestion>();
     }
 }
