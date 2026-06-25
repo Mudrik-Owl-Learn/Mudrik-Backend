@@ -9,9 +9,12 @@ using Mudrik.Application.Services.Gamification.Commands.AwardXp;
 using Mudrik.Domain.Models;
 using Mudrik.Infrastructure.Data;
 using Mudrik.Infrastructure.DataSeeding;
+using Mudrik.Infrastructure.Extensions;
 using Mudrik.Infrastructure.Realtime;
 using Mudrik.Infrastructure.Repositories;
 using Mudrik.Infrastructure.Services;
+using Mudrik.Infrastructure.Services.Repositories.BadgesEngine;
+using Mudrik.Infrastructure.Services.Repositories.Gamification;
 using Mudrik.Infrastructure.Settings;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -44,12 +47,16 @@ namespace Mudrik.API
             // SignalR
             builder.Services.AddSignalR();
 
+            builder.Services.AddSemanticKernel(builder.Configuration);
+
             builder.Services.AddScoped<IGamificationNotifier, GamificationNotifier>();
             builder.Services.AddScoped<IXpTransactionRepository, XpTransactionRepository>();
             builder.Services.AddScoped<IGamificationStreakRepository, GamificationStreakRepository>();
             builder.Services.AddScoped<IStudentDirectoryLookup, StudentDirectoryLookup>();
             builder.Services.AddScoped<IBadgeEligibilityService, BadgeEligibilityService>();
             builder.Services.AddScoped<IBadgeRepository, BadgeRepository>();
+            builder.Services.AddScoped<ILearnerAIProfileRepository, LearnerAIProfileRepository>();
+            builder.Services.AddScoped<IAdaptedLessonRepository, AdaptedLessonRepository>();
 
             //builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<AwardXpCommand>());
             //builder.Services.AddValidatorsFromAssemblyContaining<AwardXpCommandValidator>();

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Mudrik.Infrastructure.Repositories
+namespace Mudrik.Infrastructure.Services.Repositories.Gamification
 {
     public class StudentDirectoryLookup(AppDbContext context) : IStudentDirectoryLookup
     {
