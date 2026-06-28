@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Mudrik.Domain.Helpers;
 using Mudrik.Domain.Enums;
 
-namespace Mudrik.Infrastructure.Services
+namespace Mudrik.Infrastructure.Services.BadgesEngineService
 {
     public class BadgeEligibilityService(
         AppDbContext context,

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Mudrik.Infrastructure.Services.Repositories.BadgesEngine
+namespace Mudrik.Infrastructure.Services.BadgesEngineService
 {
     public class BadgeRepository(AppDbContext context) : IBadgeRepository
     {
