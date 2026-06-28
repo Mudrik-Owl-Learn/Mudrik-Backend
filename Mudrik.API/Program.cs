@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Mudrik.Application.Behaviors;
 using Mudrik.Application.Interfaces;
-using Mudrik.Application.Services.Gamification.Commands.AwardXp;
+using Mudrik.Application.Interfaces.CurriculumService;
 using Mudrik.Domain.Models;
 using Mudrik.Infrastructure.Data;
 using Mudrik.Infrastructure.DataSeeding;
@@ -13,8 +13,9 @@ using Mudrik.Infrastructure.Extensions;
 using Mudrik.Infrastructure.Realtime;
 using Mudrik.Infrastructure.Repositories;
 using Mudrik.Infrastructure.Services;
-using Mudrik.Infrastructure.Services.Repositories.BadgesEngine;
-using Mudrik.Infrastructure.Services.Repositories.Gamification;
+using Mudrik.Infrastructure.Services.BadgesEngineService;
+using Mudrik.Infrastructure.Services.GamificationService;
+using Mudrik.Infrastructure.Services.LearnerProfileService;
 using Mudrik.Infrastructure.Settings;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -58,6 +59,7 @@ namespace Mudrik.API
             builder.Services.AddScoped<IBadgeRepository, BadgeRepository>();
             builder.Services.AddScoped<ILearnerAIProfileRepository, LearnerAIProfileRepository>();
             builder.Services.AddScoped<IAdaptedLessonRepository, AdaptedLessonRepository>();
+            builder.Services.AddScoped<ICurriculumRepository, CurriculumRepository>();
 
             //builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<AwardXpCommand>());
             //builder.Services.AddValidatorsFromAssemblyContaining<AwardXpCommandValidator>();

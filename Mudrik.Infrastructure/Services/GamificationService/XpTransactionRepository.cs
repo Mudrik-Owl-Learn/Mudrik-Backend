@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Mudrik.Infrastructure.Services.Repositories.Gamification
+namespace Mudrik.Infrastructure.Services.GamificationService
 {
     public class XpTransactionRepository(AppDbContext context) : IXpTransactionRepository
     {
